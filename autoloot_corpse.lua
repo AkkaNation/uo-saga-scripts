@@ -1,18 +1,3 @@
---========= AutoLoot Corpse ========--
--- Author: Deuce
--- Description: Finds and loots nearby corpses
--- Usage: Run the script
--- Dependencies: None
---======================================--
-
--- Configuration
-local LOOT_BAG_SERIAL = 1149201932 -- << SET YOUR LOOT BAG SERIAL ID HERE, or leave nil to use backpack
-local ITEMS_TO_LOOT = BuildLootList()
-local SEARCH_RANGE = 12 -- How far to look for corpses
-local GUMP_TIMEOUT = 2000 -- Milliseconds to wait for a gump
-local ACTION_DELAY = 600 -- Milliseconds to pause between actions
-local MAX_INTERACTION_DISTANCE = 2 -- Maximum distance to interact with a corpse
-
 -- Item Types Database
 local ItemTypes = {
     Shields = {
@@ -88,14 +73,14 @@ local ItemTypes = {
     },
     Macing = {
         { ItemType = 0x13b0, Name = "War axe" },
-        { ItemType = 0x0df0, Name = "Black Staff" },
+        -- { ItemType = 0x0df0, Name = "Black Staff" },
         { ItemType = 0x1439, Name = "War Hammer" },
         { ItemType = 0x1407, Name = "War Mace" },
-        { ItemType = 0x0e89, Name = "Quarter Staff" },
+        -- { ItemType = 0x0e89, Name = "Quarter Staff" },
         { ItemType = 0x143d, Name = "Hammer Pick" },
-        { ItemType = 0x13b4, Name = "Club" },
+        -- { ItemType = 0x13b4, Name = "Club" },
         { ItemType = 0x0e81, Name = "Shepherds Crook" },
-        { ItemType = 0x13f8, Name = "Gnarled Staff" },
+        -- { ItemType = 0x13f8, Name = "Gnarled Staff" },
         { ItemType = 0x0f5c, Name = "Mace" },
         { ItemType = 0x143b, Name = "Maul" }
     },
@@ -140,6 +125,18 @@ local ItemTypes = {
     },
     Supplies = {
         { ItemType = 0x0e21, Name = "Bandage" }
+    },
+    Valuables = {
+        { ItemType = 0xFDAD, Name = "Eren Coin" },
+        { ItemType = 0x0E73, Name = "Skill Cap Ball" },
+        { ItemType = 0xFD8F, Name = "Mastery Gem" },
+        { ItemType = 0xFF3A, Name = "Skill Scroll" },
+        { ItemType = 0x9FF9, Name = "Paragon Chest" },
+        { ItemType = 0x2D9D, Name = "Grimoire" },
+        { ItemType = 0x573B, Name = "Pigments" },
+        { ItemType = 0x0F13, Name = "Ruby" },
+        { ItemType = 0x0F16, Name = "Amethyst" },
+        { ItemType = 0x0F10, Name = "Emerald" }
     }
 }
 
@@ -150,7 +147,7 @@ function BuildLootList()
     }
     local categories = {
         "Shields", "BoneArmor", "Platemail", "Chainmail", "Ringmail", "Studded", "Leather", "FemaleArmor",
-        "Fencing", "Macing", "Swords", "Axes", "Bows", "Reagents", "Supplies"
+        "Fencing", "Macing", "Swords", "Axes", "Reagents", "Supplies", "Valuables"
     }
     for _, categoryName in ipairs(categories) do
         local category = ItemTypes[categoryName]
@@ -162,6 +159,14 @@ function BuildLootList()
     end
     return lootList
 end
+
+-- Configuration
+local LOOT_BAG_SERIAL = 1149201932 -- << SET YOUR LOOT BAG SERIAL ID HERE, or leave nil to use backpack
+local ITEMS_TO_LOOT = BuildLootList()
+local SEARCH_RANGE = 12 -- How far to look for corpses
+local GUMP_TIMEOUT = 2000 -- Milliseconds to wait for a gump
+local ACTION_DELAY = 600 -- Milliseconds to pause between actions
+local MAX_INTERACTION_DISTANCE = 2 -- Maximum distance to interact with a corpse
 
 -- Function to find the nearest corpse
 function FindNearestCorpse()
