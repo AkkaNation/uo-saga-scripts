@@ -136,7 +136,8 @@ local ItemTypes = {
         { ItemType = 0x573B, Name = "Pigments" },
         { ItemType = 0x0F13, Name = "Ruby" },
         { ItemType = 0x0F16, Name = "Amethyst" },
-        { ItemType = 0x0F10, Name = "Emerald" }
+        { ItemType = 0x0F10, Name = "Emerald" },
+        { ItemType = 0x0F26, Name = "Diamond" },
     }
 }
 
@@ -247,7 +248,7 @@ function Main()
     end
 end
 
-while true do
-    Main()
-    Pause(1000)
-end
+
+Main()
+
+
