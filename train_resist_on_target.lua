@@ -55,6 +55,18 @@ function HealTarget()
     end
 end
 
+function GetSpellString()
+    if Journal.Contains('ManaDrain') then
+        return 'ManaDrain'
+    elseif Journal.Contains('Lightning') then
+        return 'Lightning'
+    elseif Journal.Contains('FlameStrike') then
+        return 'FlameStrike'
+    end
+end
+
+local lastSpell = ''
+
 -- Main training loop.
 while true do
     Pause(50)
@@ -62,11 +74,14 @@ while true do
         Meditate()
     end
 
-    if targetMobile.DiffHits >= 30 then
+    if targetMobile.DiffHits >= 80 then
         HealTarget()
     else
-        Spells.Cast('Lightning')
-        Pause(1000)
+        lastSpell = GetSpellString()
+        Spells.Cast(lastSpell)
+        Pause(100)
+        Journal.Clear()
+        Pause(100)
         if Targeting.WaitForTarget(5000) then
             Targeting.Target(targetMobile.Serial)
             Pause(800)
