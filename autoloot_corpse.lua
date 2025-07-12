@@ -162,7 +162,7 @@ function BuildLootList()
 end
 
 -- Configuration
-local LOOT_BAG_SERIAL = 1149201932 -- << SET YOUR LOOT BAG SERIAL ID HERE, or leave nil to use backpack
+local LOOT_BAG_SERIAL = 1182522402 -- << SET YOUR LOOT BAG SERIAL ID HERE, or leave nil to use backpack
 local ITEMS_TO_LOOT = BuildLootList()
 local SEARCH_RANGE = 12 -- How far to look for corpses
 local GUMP_TIMEOUT = 2000 -- Milliseconds to wait for a gump
